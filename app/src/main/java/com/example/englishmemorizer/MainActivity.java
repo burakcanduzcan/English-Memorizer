@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
         btnBack = (Button) findViewById(R.id.btnBack);
         dataBaseHelper = new DataBaseHelper(MainActivity.this);
 
-        String returnedValueSharedPref = getApplicationContext().getSharedPreferences(getApplicationContext().getPackageName(), Context.MODE_PRIVATE).getString("isInserted", "false");
+        String returnedValueSharedPref = getApplicationContext().getSharedPreferences(getApplicationContext().getPackageName(), Context.MODE_PRIVATE).getString("isInserted4", "false");
         if (returnedValueSharedPref.toString().equals("false")) {
             dataBaseHelper.starterInsert();
             SharedPreferences sharedPref = this.getSharedPreferences(this.getPackageName(), Context.MODE_PRIVATE);
             SharedPreferences.Editor edit = sharedPref.edit();
-            edit.putString("isInserted", "true");
+            edit.putString("isInserted4", "true");
             boolean b = edit.commit();
             if (b = true) {
                 Toast.makeText(this, "Successfully initialized starting dictionary", Toast.LENGTH_SHORT).show();
@@ -77,9 +77,15 @@ public class MainActivity extends AppCompatActivity {
                 } else if (stateExercise == 1) {
                     //Create intent
                     //go to exercise activity with verb key
+                    Intent intent11 = new Intent(getBaseContext(), ExerciseActivity.class);
+                    intent11.putExtra("ExerciseCategory", "Verb");
+                    startActivity(intent11);
                 } else if (stateMemorize == 1) {
                     //Create intent
                     //go to memorize activity with verb key
+                    Intent intent12 = new Intent(getBaseContext(), MemorizeActivity.class);
+                    intent12.putExtra("MemorizeCategory", "Verb");
+                    startActivity(intent12);
                 } else {
                     Toast.makeText(MainActivity.this, "Something went wrong, please report it back.", Toast.LENGTH_SHORT).show();
                 }
@@ -97,9 +103,15 @@ public class MainActivity extends AppCompatActivity {
                 } else if (stateExercise == 1) {
                     //Create intent
                     //go to exercise activity with adverb key
+                    Intent intent21 = new Intent(getBaseContext(), ExerciseActivity.class);
+                    intent21.putExtra("ExerciseCategory", "Adverb");
+                    startActivity(intent21);
                 } else if (stateMemorize == 1) {
                     //Create intent
                     //go to memorize activity with adverb key
+                    Intent intent22 = new Intent(getBaseContext(), MemorizeActivity.class);
+                    intent22.putExtra("MemorizeCategory", "Adverb");
+                    startActivity(intent22);
                 } else {
                     Toast.makeText(MainActivity.this, "Something went wrong, please report it back.", Toast.LENGTH_SHORT).show();
                 }
@@ -126,9 +138,15 @@ public class MainActivity extends AppCompatActivity {
                 } else if (stateExercise == 1) {
                     //Create intent
                     //go to exercise activity with adjective key
+                    Intent intent31 = new Intent(getBaseContext(), ExerciseActivity.class);
+                    intent31.putExtra("ExerciseCategory", "Adjective");
+                    startActivity(intent31);
                 } else if (stateMemorize == 1) {
                     //Create intent
                     //go to memorize activity with adjective key
+                    Intent intent32 = new Intent(getBaseContext(), MemorizeActivity.class);
+                    intent32.putExtra("MemorizeCategory", "Adjective");
+                    startActivity(intent32);
                 } else {
                     Toast.makeText(MainActivity.this, "Something went wrong, please report it back.", Toast.LENGTH_SHORT).show();
                 }
@@ -142,9 +160,15 @@ public class MainActivity extends AppCompatActivity {
                 if (stateExercise == 1) {
                     //Create intent
                     //go to exercise activity with Phrase-Idiom key
+                    Intent intent41 = new Intent(getBaseContext(), ExerciseActivity.class);
+                    intent41.putExtra("ExerciseCategory", "Phrase-Idiom");
+                    startActivity(intent41);
                 } else if (stateMemorize == 1) {
                     //Create intent
                     //go to memorize activity with Phrase-Idiom key
+                    Intent intent42 = new Intent(getBaseContext(), MemorizeActivity.class);
+                    intent42.putExtra("MemorizeCategory", "Phrase-Idiom");
+                    startActivity(intent42);
                 } else {
                     Toast.makeText(MainActivity.this, "Something went wrong, please report it back.", Toast.LENGTH_SHORT).show();
                 }
@@ -158,9 +182,15 @@ public class MainActivity extends AppCompatActivity {
                 if (stateExercise == 1) {
                     //Create intent
                     //go to exercise activity with User List key
+                    Intent intent51 = new Intent(getBaseContext(), ExerciseActivity.class);
+                    intent51.putExtra("ExerciseCategory", "User List");
+                    startActivity(intent51);
                 } else if (stateMemorize == 1) {
                     //Create intent
                     //go to memorize activity with User List key
+                    Intent intent52 = new Intent(getBaseContext(), MemorizeActivity.class);
+                    intent52.putExtra("MemorizeCategory", "User List");
+                    startActivity(intent52);
                 } else {
                     Toast.makeText(MainActivity.this, "Something went wrong, please report it back.", Toast.LENGTH_SHORT).show();
                 }
@@ -181,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                     btnBack.setVisibility(View.INVISIBLE);
                     btn1.setText("Exercise");
                     btn2.setText("Add Word");
-                    btn2.setText("Memorize");
+                    btn3.setText("Memorize");
                 }
             }
         });
