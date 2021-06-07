@@ -26,7 +26,7 @@ public class MemorizeActivity extends AppCompatActivity {
 
     TextView tvWord, tvDefinition, tvExample, tvSynonyms, tvAntonyms;
     ImageView ivImage;
-    Button btnNext;
+    Button btnNext, btnAddToList;
     DataBaseHelper dataBaseHelper;
     int currentWordIndex = 0;
     List<UserlistModel> wordsToMemorize;
@@ -43,11 +43,16 @@ public class MemorizeActivity extends AppCompatActivity {
         tvAntonyms = (TextView) findViewById(R.id.tvAntonyms);
         ivImage = (ImageView) findViewById(R.id.ivImage);
         btnNext = (Button) findViewById(R.id.btnNext);
+        btnAddToList = (Button) findViewById(R.id.btnAddToList);
 
         dataBaseHelper = new DataBaseHelper(MemorizeActivity.this);
         //get data from intent
         String memorizeCategory = getIntent().getStringExtra("MemorizeCategory");
         //Toast.makeText(this, memorizeCategory, Toast.LENGTH_SHORT).show();
+
+        if (memorizeCategory.toString().equals("User List")) {
+            btnAddToList.setVisibility(View.INVISIBLE);
+        }
 
         //create list of words from specific category
         wordsToMemorize = new ArrayList<>();
@@ -71,6 +76,39 @@ public class MemorizeActivity extends AppCompatActivity {
                     Toast.makeText(MemorizeActivity.this, "End of the category", Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        btnAddToList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (tvWord.getText().toString().equals("UNKNOWN")) {
+                    Toast.makeText(MemorizeActivity.this, "Word not found", Toast.LENGTH_SHORT).show();
+                } else {
+                    UserlistModel userlistModel;
+                    try {
+                        userlistModel = new UserlistModel(-1,
+                                "User List",
+                                wordsToMemorize.get(currentWordIndex).getWord(),
+                                wordsToMemorize.get(currentWordIndex).getDefinition(),
+                                wordsToMemorize.get(currentWordIndex).getExampleSentence(),
+                                wordsToMemorize.get(currentWordIndex).getSynonyms(),
+                                wordsToMemorize.get(currentWordIndex).getAntonyms(),
+                                wordsToMemorize.get(currentWordIndex).getImagePath()
+                        );
+                    } catch (Exception e) {
+                        Toast.makeText(MemorizeActivity.this, "Error when adding the word to user list", Toast.LENGTH_SHORT).show();
+                        userlistModel = new UserlistModel(-1, "error", "error", "error", "error", "error", "error", "error");
+                    }
+
+                    DataBaseHelper dataBaseHelper = new DataBaseHelper(MemorizeActivity.this);
+                    boolean success = dataBaseHelper.addOne(userlistModel);
+                    if (success) {
+                        Toast.makeText(MemorizeActivity.this, "Word added to the user list!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MemorizeActivity.this, "Failed to add to the user list", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
     }
