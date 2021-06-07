@@ -19,6 +19,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MemorizeActivity extends AppCompatActivity {
@@ -42,8 +43,8 @@ public class MemorizeActivity extends AppCompatActivity {
         tvAntonyms = (TextView) findViewById(R.id.tvAntonyms);
         ivImage = (ImageView) findViewById(R.id.ivImage);
         btnNext = (Button) findViewById(R.id.btnNext);
-        dataBaseHelper = new DataBaseHelper(MemorizeActivity.this);
 
+        dataBaseHelper = new DataBaseHelper(MemorizeActivity.this);
         //get data from intent
         String memorizeCategory = getIntent().getStringExtra("MemorizeCategory");
         //Toast.makeText(this, memorizeCategory, Toast.LENGTH_SHORT).show();
@@ -51,6 +52,7 @@ public class MemorizeActivity extends AppCompatActivity {
         //create list of words from specific category
         wordsToMemorize = new ArrayList<>();
         wordsToMemorize = dataBaseHelper.getFromCategory(memorizeCategory);
+        Collections.shuffle(wordsToMemorize);
         //Toast.makeText(this, "Size of array is: " + wordsToMemorize.size(), Toast.LENGTH_SHORT).show();
 
         //show word in activity START
