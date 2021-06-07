@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EnglishMemorizer">
+        <activity android:name=".MemorizeActivity"></activity>
+        <activity android:name=".ExerciseActivity" />
+        <activity android:name=".UserlistActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
